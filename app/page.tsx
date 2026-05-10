@@ -17,6 +17,73 @@ const channels = [
   { label: "Email", href: "mailto:archanaaditama@gmail.com" },
 ];
 
+const siteUrl = "https://qrcode.archana.co.id";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#business`,
+      name: "Archana App",
+      url: siteUrl,
+      logo: `${siteUrl}/archana-logo.png`,
+      image: `${siteUrl}/archana-logo.png`,
+      description:
+        "Archana App adalah partner digital dari Klaten, Jawa Tengah untuk website bisnis, automasi, dan QR code promosi.",
+      email: "archanaaditama@gmail.com",
+      telephone: "+62895363076706",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Klaten",
+        addressRegion: "Jawa Tengah",
+        addressCountry: "ID",
+      },
+      areaServed: [
+        {
+          "@type": "AdministrativeArea",
+          name: "Klaten",
+        },
+        {
+          "@type": "Country",
+          name: "Indonesia",
+        },
+      ],
+      sameAs: ["https://www.instagram.com/archana.tech/"],
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${siteUrl}/#qr-generator`,
+      name: "Archana App QR Code Generator",
+      url: siteUrl,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      isAccessibleForFree: true,
+      browserRequirements: "Requires JavaScript",
+      description:
+        "Generator QR code gratis untuk membuat QR dari link Instagram, Google Maps, katalog, menu, event, dan promosi bisnis.",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "IDR",
+      },
+      provider: {
+        "@id": `${siteUrl}/#business`,
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "Archana App QR Code Generator",
+      url: siteUrl,
+      inLanguage: "id-ID",
+      publisher: {
+        "@id": `${siteUrl}/#business`,
+      },
+    },
+  ],
+};
+
 export default function Home() {
   const [url, setUrl] = useState("https://www.instagram.com/archana.tech/");
   const [qr, setQr] = useState("");
@@ -41,6 +108,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#05070f] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <nav className="animate-fade-in sticky top-0 z-20 border-b border-white/10 bg-[#05070f]/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
           <a href="#home" className="flex items-center gap-3">
